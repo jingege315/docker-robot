@@ -8,10 +8,10 @@ Welcome to PRs!
 
 what packages in this docker image?
 
-* CUDA(version=10.1)
-* cuDNN(version=7.4)
-* PyTorch(version=1.5)
-* TensorFlow(version=2.1.0)
+* CUDA(version=11.0)
+* cuDNN(version=8)
+* PyTorch(version=1.7)
+* TensorFlow(version=2.4.0)
 * some open source toolboxes based on PyTorch: Fairseq, MMCV, MMDetection, MMSegmentation
 * latest packages from apt: git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl tree screen unzip
 * latest packages from conda: numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba jupyter_contrib_nbextensions jupytext xgboost psutil jupyter
@@ -30,7 +30,7 @@ Maybe build will take some time.
 ```bash
 git clone https://github.com/jingege315/robot.git
 cd robot/docker
-docker image build -t jingege315/robot:0.1 .
+docker image build -t jingege315/robot:0.2 .
 ```
 
 ### download image from Docker Hub
@@ -38,7 +38,7 @@ docker image build -t jingege315/robot:0.1 .
 This is simplest way to get the image.
 
 ```bash
-docker pull jingege315/robot:0.1
+docker pull jingege315/robot:0.2
 ```
 
 ## generate container
@@ -46,7 +46,7 @@ docker pull jingege315/robot:0.1
 the command to generate container from this docker image (see more reference [here](https://docs.docker.com/engine/reference/commandline/container_create/)):
 
 ```bash
-nvidia-docker container run -dit -v <path_in_local>:<path_host> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.1
+nvidia-docker container run -dit -v <path_in_local>:<path_host> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.2
 ```
 
 # more
@@ -90,3 +90,16 @@ docker container exec -it robot_container jupyter notebook /project/kayotype_aug
 - add some machine learning framework: PyTorch(version=1.5) and TensorFlow(version=2.1.0).
 - add some open source toolboxes based on PyTorch: Fairseq, MMCV, MMDetection, MMSegmentation.
 - add many useful python packages as many as possible.
+
+## 0.2
+
+Many package versions have been upgraded.
+
+| package name | version 0.1 | version 0.2 |
+| ------------ | ----------- | ----------- |
+| CUDA         | 10.1        | 11.0        |
+| cuDNN        | 7           | 8           |
+| PyTorch      | 1.5         | 1.7         |
+| TensorFlow   | 2.1.0       | 2.4.0       |
+
+The PyTorch of this version successfully runs on GeForce RTX 3090.

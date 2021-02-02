@@ -1,12 +1,18 @@
-ARG PYTORCH="1.5"
-ARG CUDA="10.1"
-ARG CUDNN="7"
+ARG PYTORCH="1.7.0"
+ARG CUDA="11.0"
+ARG CUDNN="8"
 # the version relationship of tensorflow and cuda: https://www.tensorflow.org/install/source_windows
-# this is ok for CUDA=10.1, cuDNN=7.4
-ARG TENSORFLOW="2.1.0"
+# this is ok for CUDA=11.0, cuDNN=8.0
+ARG TENSORFLOW="2.4.0"
+ARG MMCV=latest+torch${PYTORCH}+cu110
 
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-runtime
 
+ARG PYTORCH
+ARG CUDA
+ARG CUDNN
+ARG TENSORFLOW
+ARG MMCV
 
 # libgl1-mesa-glx: opencv need it
 RUN apt update && apt install -y git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl libgl1-mesa-glx tree screen unzip
@@ -17,10 +23,10 @@ RUN apt update && apt install -y git build-essential cmake openssh-server vim ls
 RUN conda install -y numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba
 RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 RUN conda install -y -c anaconda psutil jupyter
-RUN conda install -y tensorflow-gpu=${TENSORFLOW}
 #RUN /opt/conda/bin/conda clean -ya
 
 RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba
+RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 
 # install pytorch/fairseq: https://github.com/pytorch/fairseq
 RUN git clone https://github.com/pytorch/fairseq.git /workspace/fairseq
@@ -30,7 +36,7 @@ WORKDIR /workspace/fairseq
 RUN pip install --no-cache-dir -e .
 
 # install MMCV
-RUN pip install mmcv-full==latest+torch1.5.0+cu101 -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
+RUN pip install mmcv-full==${MMCV} -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
 
 # install mmdetection：https://github.com/open-mmlab/mmdetection.git
 RUN git clone https://github.com/open-mmlab/mmdetection.git /workspace/mmdetection
