@@ -15,7 +15,7 @@ what packages in this docker image?
 * some open source toolboxes based on PyTorch: Fairseq, MMCV, MMDetection, MMSegmentation
 * latest packages from apt: git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl tree screen unzip
 * latest packages from conda: numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba jupyter_contrib_nbextensions jupytext xgboost psutil jupyter
-* latest packages from pip: opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba
+* latest packages from pip: opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl
 
 # how to use
 
@@ -30,7 +30,7 @@ Maybe build will take some time.
 ```bash
 git clone https://github.com/jingege315/robot.git
 cd robot/docker
-docker image build -t jingege315/robot:0.2 .
+docker image build -t jingege315/robot:0.2.1 .
 ```
 
 ### download image from Docker Hub
@@ -38,7 +38,7 @@ docker image build -t jingege315/robot:0.2 .
 This is simplest way to get the image.
 
 ```bash
-docker pull jingege315/robot:0.2
+docker pull jingege315/robot:0.2.1
 ```
 
 ## generate container
@@ -46,7 +46,7 @@ docker pull jingege315/robot:0.2
 the command to generate container from this docker image (see more reference [here](https://docs.docker.com/engine/reference/commandline/container_create/)):
 
 ```bash
-nvidia-docker container run -dit -v <path_in_local>:<path_host> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.2
+nvidia-docker container run -dit -v <path_in_local>:<path_host> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.2.1
 ```
 
 # more
