@@ -25,7 +25,7 @@ RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboos
 RUN conda install -y -c anaconda psutil jupyter
 #RUN /opt/conda/bin/conda clean -ya
 
-RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba
+RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl
 RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 
 # install pytorch/fairseq: https://github.com/pytorch/fairseq
@@ -33,6 +33,7 @@ RUN git clone https://github.com/pytorch/fairseq.git /workspace/fairseq
 # If your clone is slow from github, you can try to clone from gitee (I sync code by hand)
 #RUN git clone https://gitee.com/Jingege315/fairseq.git /workspace/fairseq
 WORKDIR /workspace/fairseq
+RUN git checkout ee0d5a0f65a25e5f5372776402aac5cb9c4adbf1
 RUN pip install --no-cache-dir -e .
 
 # install MMCV
@@ -43,6 +44,7 @@ RUN git clone https://github.com/open-mmlab/mmdetection.git /workspace/mmdetecti
 # If your clone is slow from github, you can try to clone from gitee (I sync code by hand)
 #RUN git clone https://gitee.com/Jingege315/mmdetection.git /workspace/mmdetection
 WORKDIR /workspace/mmdetection
+RUN git checkout a3b004100dd602bfd0e4212a64f63aa058f02ebb
 ENV FORCE_CUDA="1"
 RUN pip install -r requirements/build.txt
 RUN pip install --no-cache-dir -e .
@@ -52,6 +54,7 @@ RUN git clone https://github.com/open-mmlab/mmsegmentation.git /workspace/mmsegm
 # If your clone is slow from github, you can try to clone from gitee (I sync code by hand)
 #RUN git clone https://gitee.com/Jingege315/mmsegmentation.git /workspace/mmsegmentation
 WORKDIR /workspace/mmsegmentation
+RUN git checkout 0df07ab11f8d042751b3a86425ec9a098bfa8dcb
 RUN pip install --no-cache-dir -e .
 
 # install jupyter tools
