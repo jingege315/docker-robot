@@ -28,7 +28,7 @@ RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboos
 RUN conda install -y -c anaconda psutil jupyter
 #RUN /opt/conda/bin/conda clean -ya
 
-RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables
+RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting
 RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 
 # install pytorch/fairseq: https://github.com/pytorch/fairseq
