@@ -23,14 +23,40 @@ what packages in this docker image?
 
 You can generate image from `Dockerfile` or download image from [Docker Hub](https://hub.docker.com/).
 
-### generate image from `Dockerfile`
+### generate image from `Dockerfile` by docker
 
 Maybe build will take some time.
 
 ```bash
 git clone https://github.com/jingege315/robot.git
-cd robot/docker
-docker image build -t jingege315/robot:0.2.1 .
+cd robot
+docker image build -t jingege315/robot:0.3 docker
+```
+
+If your clone is slow from github, you can try to clone from gitee (I sync code by hand).
+
+```bash
+git clone https://github.com/jingege315/robot.git
+cd robot
+docker image build -t jingege315/robot:0.3 docker --build-arg USE_GITEE=1
+```
+
+### generate image from `Dockerfile` by BuildKit
+
+Maybe build will take some time.
+
+```bash
+git clone https://github.com/jingege315/robot.git
+cd robot
+DOCKER_BUILDKIT=1 docker image build -t jingege315/robot:0.3 buildkit
+```
+
+If your clone is slow from github, you can try to clone from gitee (I sync code by hand).
+
+```bash
+git clone https://github.com/jingege315/robot.git
+cd robot
+DOCKER_BUILDKIT=1 docker image build -t jingege315/robot:0.3 buildkit --build-arg USE_GITEE=1
 ```
 
 ### download image from Docker Hub
@@ -38,7 +64,7 @@ docker image build -t jingege315/robot:0.2.1 .
 This is simplest way to get the image.
 
 ```bash
-docker pull jingege315/robot:0.2.1
+docker pull jingege315/robot:0.3
 ```
 
 ## generate container
@@ -46,7 +72,7 @@ docker pull jingege315/robot:0.2.1
 the command to generate container from this docker image (see more reference [here](https://docs.docker.com/engine/reference/commandline/container_create/)):
 
 ```bash
-nvidia-docker container run -dit -v <path_host>:<path_container> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.2
+nvidia-docker container run -dit -v <path_host>:<path_container> --name robot_container -p <port_host>:<port_container> --ipc=host jingege315/robot:0.3
 ```
 
 # more
@@ -103,3 +129,9 @@ Many package versions have been upgraded.
 | TensorFlow   | 2.1.0       | 2.4.0       |
 
 The PyTorch of this version successfully runs on GeForce RTX 3090.
+
+## 0.3
+
+* **BuildKit can be used to generate image.**
+* add package: openpyxl lightgbm tables pytorch-lightning pytorch-forecasting.
+* add USE_GITEE flag into Dockerfile. 

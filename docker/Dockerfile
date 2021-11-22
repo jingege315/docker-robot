@@ -13,20 +13,15 @@ ARG CUDA
 ARG CUDNN
 ARG TENSORFLOW
 ARG MMCV
-# If your clone is slow from github, you can try to clone from gitee (I sync code by hand)
-# docker image build -t jingege315/robot . --build-arg USE_GITEE
+
 ARG USE_GITEE
 
 # libgl1-mesa-glx: opencv need it
 RUN apt update && apt install -y git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl libgl1-mesa-glx tree screen unzip
-# cleaning the cache will make install packages in the future slower
-#RUN apt clean
-#RUN rm -rf /var/lib/apt/lists/*
 
 RUN conda install -y numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba
 RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 RUN conda install -y -c anaconda psutil jupyter
-#RUN /opt/conda/bin/conda clean -ya
 
 RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting
 RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
@@ -34,10 +29,10 @@ RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 # install pytorch/fairseq: https://github.com/pytorch/fairseq
 RUN if [ -z "$USE_GITEE" ] ; then \
     echo clone fairseq from github ; \
-    git clone https://github.com/pytorch/fairseq.git /workspace/fairseq ;  \
+    git clone https://github.com/pytorch/fairseq.git /workspace/fairseq ; \
     else \
     echo clone fairseq from gitee ; \
-    git clone https://gitee.com/Jingege315/fairseq.git /workspace/fairseq ;  \
+    git clone https://gitee.com/Jingege315/fairseq.git /workspace/fairseq ; \
     fi
 WORKDIR /workspace/fairseq
 RUN git checkout ee0d5a0f65a25e5f5372776402aac5cb9c4adbf1
@@ -49,10 +44,10 @@ RUN pip install mmcv-full==${MMCV} -f https://openmmlab.oss-accelerate.aliyuncs.
 # install mmdetection：https://github.com/open-mmlab/mmdetection.git
 RUN if [ -z "$USE_GITEE" ] ; then \
     echo clone mmdetection from github ; \
-    git clone https://github.com/open-mmlab/mmdetection.git /workspace/mmdetection ;  \
+    git clone https://github.com/open-mmlab/mmdetection.git /workspace/mmdetection ; \
     else \
     echo clone mmdetection from gitee ; \
-    git clone https://gitee.com/Jingege315/mmdetection.git /workspace/mmdetection ;  \
+    git clone https://gitee.com/Jingege315/mmdetection.git /workspace/mmdetection ; \
     fi
 WORKDIR /workspace/mmdetection
 RUN git checkout a3b004100dd602bfd0e4212a64f63aa058f02ebb
@@ -63,10 +58,10 @@ RUN pip install --no-cache-dir -e .
 # install mmsegmentation：https://github.com/open-mmlab/mmsegmentation
 RUN if [ -z "$USE_GITEE" ] ; then \
     echo clone mmsegmentation from github ; \
-    git clone https://github.com/open-mmlab/mmsegmentation.git /workspace/mmsegmentation ;  \
+    git clone https://github.com/open-mmlab/mmsegmentation.git /workspace/mmsegmentation ; \
     else \
     echo clone mmsegmentation from gitee ; \
-    git clone https://gitee.com/Jingege315/mmsegmentation.git /workspace/mmsegmentation ;  \
+    git clone https://gitee.com/Jingege315/mmsegmentation.git /workspace/mmsegmentation ; \
     fi
 WORKDIR /workspace/mmsegmentation
 RUN git checkout 0df07ab11f8d042751b3a86425ec9a098bfa8dcb
