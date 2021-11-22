@@ -22,14 +22,20 @@ ENV GIT=${GIT:-github}
 RUN echo clone git repos from ${GIT}
 
 # libgl1-mesa-glx: opencv need it
-RUN --mount=type=cache,target=/var/cache/apt,id=cache_apt,sharing=locked apt update && apt install -y git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl libgl1-mesa-glx tree screen unzip
+RUN --mount=type=cache,target=/var/cache/apt,id=cache_apt,sharing=locked apt update
+RUN --mount=type=cache,target=/var/cache/apt,id=cache_apt,sharing=locked apt install -y git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl libgl1-mesa-glx tree screen unzip
 
 RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba
 RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y -c anaconda psutil jupyter
 
-RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting
+RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting pyarrow
 RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install tensorflow-gpu==${TENSORFLOW}
+
+# install PyTorchViz tool
+# https://github.com/szagoruyko/pytorchviz
+RUN --mount=type=cache,target=/var/cache/apt,id=cache_apt,sharing=locked apt install -y graphviz
+RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install torchviz
 
 # install pytorch/fairseq: https://github.com/pytorch/fairseq
 RUN --mount=type=cache,target=/cache_git,id=cache_git \
