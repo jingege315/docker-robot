@@ -6,7 +6,7 @@ ARG CUDNN="8"
 # the version relationship of tensorflow and cuda: https://www.tensorflow.org/install/source_windows
 # this is ok for CUDA=11.0, cuDNN=8.0
 ARG TENSORFLOW="2.4.0"
-ARG MMCV=latest+torch${PYTORCH}+cu110
+ARG MMCV=1.3.5+torch${PYTORCH}+cu110
 
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-runtime
 
@@ -67,7 +67,8 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
     fi ; \
     cp /cache_git/${GIT}/mmdetection /workspace/mmdetection -r
 WORKDIR /workspace/mmdetection
-RUN git checkout a3b004100dd602bfd0e4212a64f63aa058f02ebb
+# 2.13.0
+RUN git checkout a8c681d2854ecdb059fa7ddc12d786dca744ccfb
 ENV FORCE_CUDA="1"
 RUN pip install -r requirements/build.txt
 RUN pip install --no-cache-dir -e .
