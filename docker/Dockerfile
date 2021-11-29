@@ -23,7 +23,9 @@ RUN conda install -y numpy matplotlib pandas scipy scikit-learn scikit-image pyq
 RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 RUN conda install -y -c anaconda psutil jupyter
 
-RUN pip install --no-cache-dir opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting pyarrow
+RUN pip install --no-cache-dir flask gevent werkzeug h5py thop paramiko jieba openpyxl lightgbm tables pyarrow
+RUN pip install --no-cache-dir torchsummaryX torchsummary efficientnet_pytorch catalyst albumentations pytorch-lightning pytorch-forecasting
+RUN pip install --no-cache-dir opencv-contrib-python
 RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 
 # install PyTorchViz tool

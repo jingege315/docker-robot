@@ -29,7 +29,9 @@ RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y nu
 RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 RUN --mount=type=cache,target=/opt/conda/pkgs,id=cache_conda conda install -y -c anaconda psutil jupyter
 
-RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting pyarrow
+RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install flask gevent werkzeug h5py thop paramiko jieba openpyxl lightgbm tables pyarrow
+RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install torchsummaryX torchsummary efficientnet_pytorch catalyst albumentations pytorch-lightning pytorch-forecasting
+RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install opencv-contrib-python
 RUN --mount=type=cache,target=/root/.cache/pip,id=cache_pip pip install tensorflow-gpu==${TENSORFLOW}
 
 # install PyTorchViz tool
