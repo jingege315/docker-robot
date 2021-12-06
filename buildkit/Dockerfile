@@ -69,7 +69,7 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
     fi ; \
     cp /cache_git/${GIT}/mmdetection /workspace/mmdetection -r
 WORKDIR /workspace/mmdetection
-# 2.13.0
+# version 2.13.0
 RUN git checkout a8c681d2854ecdb059fa7ddc12d786dca744ccfb
 ENV FORCE_CUDA="1"
 RUN pip install -r requirements/build.txt
@@ -87,7 +87,8 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
     fi ; \
     cp /cache_git/${GIT}/mmsegmentation /workspace/mmsegmentation -r
 WORKDIR /workspace/mmsegmentation
-RUN git checkout 0df07ab11f8d042751b3a86425ec9a098bfa8dcb
+# version 0.19.0
+RUN git checkout 504965184c3e6bc9ec43af54237129ef21981a5f
 RUN pip install --no-cache-dir -e .
 
 # install jupyter tools
