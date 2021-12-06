@@ -49,6 +49,7 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
             git clone https://gitee.com/Jingege315/fairseq.git /cache_git/${GIT}/fairseq ; \
         fi ; \
     fi ; \
+    cd /cache_git/${GIT}/fairseq ; git fetch --all --tags ; cd / ; \
     cp /cache_git/${GIT}/fairseq /workspace/fairseq -r
 WORKDIR /workspace/fairseq
 RUN git checkout ee0d5a0f65a25e5f5372776402aac5cb9c4adbf1
@@ -67,6 +68,7 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
             git clone https://gitee.com/Jingege315/mmdetection.git /cache_git/${GIT}/mmdetection ; \
         fi ; \
     fi ; \
+    cd /cache_git/${GIT}/mmdetection ; git fetch --all --tags ; cd / ; \
     cp /cache_git/${GIT}/mmdetection /workspace/mmdetection -r
 WORKDIR /workspace/mmdetection
 # version 2.13.0
@@ -85,6 +87,7 @@ RUN --mount=type=cache,target=/cache_git,id=cache_git \
             git clone https://gitee.com/Jingege315/mmsegmentation.git /cache_git/${GIT}/mmsegmentation ; \
         fi ; \
     fi ; \
+    cd /cache_git/${GIT}/mmsegmentation ; git fetch --all --tags ; cd / ; \
     cp /cache_git/${GIT}/mmsegmentation /workspace/mmsegmentation -r
 WORKDIR /workspace/mmsegmentation
 # version 0.19.0
