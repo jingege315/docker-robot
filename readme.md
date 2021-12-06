@@ -8,11 +8,11 @@ Welcome to PRs!
 
 what packages in this docker image?
 
-* CUDA(version=11.0)
+* CUDA(version=11.3)
 * cuDNN(version=8)
-* PyTorch(version=1.7)
-* TensorFlow(version=2.4.0)
-* some open source toolboxes based on PyTorch: Fairseq, MMCV, MMDetection, MMSegmentation
+* PyTorch(version=1.10)
+* TensorFlow(version=2.6.0)
+* some open source toolboxes based on PyTorch: Fairseq(version=0.10.2), MMCV(version=1.3.18), MMDetection(version=2.19.0), MMSegmentation(version=0.19.0)
 * latest packages from apt: git build-essential cmake openssh-server vim lsof net-tools iputils-ping cifs-utils curl tree screen unzip
 * latest packages from conda: numpy matplotlib pandas scipy scikit-learn scikit-image pyqt seaborn cython tqdm sympy numba jupyter_contrib_nbextensions jupytext xgboost psutil jupyter
 * latest packages from pip: opencv-python flask gevent werkzeug h5py torchsummaryX torchsummary thop efficientnet_pytorch catalyst paramiko albumentations jieba openpyxl lightgbm tables pytorch-lightning pytorch-forecasting PyTorchViz pyarrow
@@ -135,3 +135,21 @@ The PyTorch of this version successfully runs on GeForce RTX 3090.
 * **BuildKit can be used to generate image.**
 * add package: openpyxl lightgbm tables pytorch-lightning pytorch-forecasting.
 * add USE_GITEE flag into Dockerfile. 
+
+## 0.4
+
+Many package versions have been upgraded.
+
+**Fix the version of Fairseq, MMCV, MMDetection and MMSegmentation.**
+
+| package name   | version 0.1 | version 0.2 | version 0.4 |
+| -------------- | ----------- | ----------- | ----------- |
+| CUDA           | 10.1        | 11.0        | 11.3        |
+| cuDNN          | 7           | 8           | 8           |
+| PyTorch        | 1.5         | 1.7         | 1.10        |
+| TensorFlow     | 2.1.0       | 2.4.0       | 2.6.0       |
+| Fairseq        |             |             | 0.10.2      |
+| MMCV           |             |             | 1.3.18      |
+| MMDetection    |             |             | 2.19.0      |
+| MMSegmentation |             |             | 0.19.0      |
+
