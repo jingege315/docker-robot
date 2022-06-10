@@ -39,7 +39,7 @@ RUN conda install -y -c anaconda psutil jupyter
 RUN conda install -y -c conda-forge jupyter_contrib_nbextensions jupytext xgboost
 
 RUN pip install --no-cache-dir flask gevent werkzeug h5py thop paramiko jieba openpyxl lightgbm tables pyarrow
-RUN pip install --no-cache-dir torchsummaryX torchsummary efficientnet_pytorch catalyst albumentations pytorch-lightning pytorch-forecasting
+RUN pip install --no-cache-dir torchsummaryX torchsummary efficientnet_pytorch catalyst albumentations pytorch-lightning pytorch-forecasting timm
 RUN pip install --no-cache-dir opencv-contrib-python
 RUN pip install --no-cache-dir tensorflow-gpu==${TENSORFLOW}
 
